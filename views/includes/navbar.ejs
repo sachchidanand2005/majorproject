@@ -1,0 +1,231 @@
+<style>
+  /* ---------------- Common Styles ---------------- */
+  .search-btn {
+    background-color: #fe424d;
+    color: #fff;
+    border-radius: 25px;
+    padding: 0.5rem 1rem;
+  }
+
+  .search-btn:hover {
+    background-color: #fe424d;
+    color: #fff;
+  }
+
+  .search-inp {
+    border-radius: 25px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  /* Airbnb-like round search bar */
+  .search-bar {
+    border: 1px solid #ddd;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    padding: 0.3rem 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+
+  .search-bar:hover {
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .search-bar span {
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+    color: #333;
+  }
+
+  .search-bar i {
+    color: #fe424d;
+  }
+  .btn-search{
+    color: #fe424d;
+  }
+
+
+  /* Hide mobile elements by default */
+  .mobile-top-search,
+  .mobile-bottom-nav {
+    display: none;
+  }
+
+  /* ---------------- Mobile View ---------------- */
+  @media (max-width: 768px) {
+    /* Hide desktop navbar */
+    .desktop-navbar {
+      display: none !important;
+    }
+
+    /* Fixed top search bar */
+    .mobile-top-search {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      z-index: 1050;
+      padding: 0.7rem 1rem;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .mobile-search-bar {
+      width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .mobile-search-bar input {
+      border: none;
+      outline: none;
+      width: 100%;
+      margin-left: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    /* Fixed bottom icon navbar (always visible) */
+    .mobile-bottom-nav {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      border-top: 1px solid #ddd;
+      padding: 0.4rem 0;
+      z-index: 1050;
+      box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .mobile-bottom-nav a {
+      text-align: center;
+      color: #666;
+      font-size: 1.3rem;
+      text-decoration: none;
+    }
+
+    .mobile-bottom-nav a span {
+      display: block;
+      font-size: 0.7rem;
+      color: #666;
+    }
+
+    .mobile-bottom-nav a.active,
+    .mobile-bottom-nav a:hover {
+      color: #fe424d;
+    }
+
+    /* Add padding so content not hidden under bottom nav */
+    body {
+      padding-bottom: 70px;
+      padding-top: 70px; /* space for top search bar */
+    }
+  }
+</style>
+
+<!-- 🔸 Desktop Navbar -->
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top desktop-navbar">
+  <div class="container-fluid">
+    <!-- Brand -->
+    <a class="navbar-brand d-flex align-items-center" href="/listings">
+      <i class="fa-regular fa-compass me-2"></i>
+      <span class="fw-bold">Wanderlust</span>
+    </a>
+
+    <!-- Toggle for small desktop screens -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+      aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar content -->
+    <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
+      <ul class="navbar-nav align-items-center mb-2 mb-md-0">
+        <!-- Explore -->
+        <li class="nav-item">
+          <a class="nav-link" href="/listings">Explore</a>
+        </li>
+
+        <!-- Airbnb your home -->
+        <li class="nav-item">
+          <a class="nav-link" href="/listings/new">Airbnb your home</a>
+        </li>
+
+        <!-- Search Bar -->
+        <!-- <li class="nav-item mx-3">
+          <div class="search-bar">
+            <span>Anywhere</span> • <span>Any week</span> • <span>Add guests</span>
+            <i class="fa-solid fa-magnifying-glass ms-2"></i>
+          </div>
+        </li> -->
+         <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search destinations" aria-label="Search"/>
+        <button class="btn btn-outline btn-search" type="submit">Search</button>
+      </form>
+
+        <!-- Auth links -->
+        <% if (!currUser) { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/signup"><b>Sign up</b></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login"><b>Log in</b></a>
+          </li>
+        <% } else { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout"><b>Log out</b></a>
+          </li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- 🔹 Mobile Top Search -->
+<div class="mobile-top-search d-md-none">
+  <div class="mobile-search-bar">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="text" placeholder="Search destinations" />
+  </div>
+</div>
+
+<!-- 🔹 Mobile Bottom Navbar (Always Fixed) -->
+<div class="mobile-bottom-nav d-md-none">
+  <a href="/listings" class="active" title="Explore">
+    <i class="fa-solid fa-compass"></i>
+    <span>Explore</span>
+  </a>
+  <a href="/listings/new" title="Host">
+    <i class="fa-solid fa-house-chimney"></i>
+    <span>Host</span>
+  </a>
+  <a href="#" title="Search">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span>Search</span>
+  </a>
+  <% if (!currUser) { %>
+    <a href="/login" title="Login">
+      <i class="fa-solid fa-user"></i>
+      <span>Login</span>
+    </a>
+  <% } else { %>
+    <a href="/logout" title="Logout">
+      <i class="fa-solid fa-right-from-bracket"></i>
+      <span>Logout</span>
+    </a>
+  <% } %>
+</div>

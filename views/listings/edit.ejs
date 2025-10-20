@@ -1,0 +1,84 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="container mt-3">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8">
+      <h3>Edit your Listing</h3>
+      <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" 
+        novalidate class="needs-validation" enctype="multipart/form-data">
+
+        <!-- Title -->
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input name="listing[title]" value="<%= listing.title %>" type="text" class="form-control" required>
+          <div class="valid-feedback">Title looks good!</div>
+          <div class="invalid-feedback">Title should be valid</div>
+        </div>
+
+        <!-- Description -->
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea name="listing[description]" class="form-control" required><%= listing.description %></textarea>
+          <div class="invalid-feedback">Please enter a short description</div>
+        </div>
+
+        <!-- Original Image -->
+        <div class="mb-3 text-center">
+          <label class="form-label">Original Listing Image</label>
+          <img src="<%= listing.image.url %>" alt="img" class="img-fluid rounded" style="max-height: 20rem;">
+        </div>
+
+        <!-- Upload New Image -->
+        <div class="mb-3">
+          <label for="image" class="form-label">Upload New Image</label>
+          <input name="listing[image][url]" type="file" class="form-control">
+        </div>
+
+        <!-- Price and Country Row -->
+        <div class="row">
+          <div class="mb-3 col-12 col-md-4">
+            <label for="price" class="form-label">Price</label>
+            <input name="listing[price]" value="<%= listing.price %>" type="number" class="form-control" required>
+            <div class="invalid-feedback">Price should be valid</div>
+          </div>
+
+          <div class="mb-3 col-12 col-md-8">
+            <label for="country" class="form-label">Country</label>
+            <input name="listing[country]" value="<%= listing.country %>" type="text" class="form-control" required>
+            <div class="invalid-feedback">Country name should be valid</div>
+          </div>
+        </div>
+
+        <!-- Location -->
+        <div class="mb-3">
+          <label for="location" class="form-label">Location</label>
+          <input name="listing[location]" value="<%= listing.location %>" type="text" class="form-control" required>
+          <div class="invalid-feedback">Location should be valid</div>
+        </div>
+
+        <!-- Submit Button -->
+        <button class="btn btn-dark edit-btn mt-3 w-100">Edit</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Make form inputs fully responsive */
+  .form-control {
+    width: 100%;
+  }
+
+  /* Rounded image */
+  .img-fluid {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Edit button full width on small screens */
+  @media (min-width: 768px) {
+    .edit-btn {
+      width: auto;
+    }
+  }
+</style>
