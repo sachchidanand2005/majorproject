@@ -24,8 +24,7 @@ const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
 const MONGO_URL ="mongodb://127.0.0.1:27017/wanderlust";
-//const dbUrl = process.env.ATLASDB_URL; 
-//const MONGO_URL = "mongodb+srv://sachchidanandrajbhar91:Rajbhar%40123@cluster0.2pnbbae.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+
 main()
 .then(()=>{
     console.log("connected to db");
@@ -47,7 +46,7 @@ app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
 const sessionOptions = {
-    secret: "mysupersecretcode",
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie:{
